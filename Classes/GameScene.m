@@ -13,7 +13,7 @@
 // GameScene implementation
 @implementation GameScene
 
-@synthesize score,allowTouch,remainingTime,bar;
+@synthesize score,allowTouch,remainingTime,bar,timeStatus;
 
 +(id) scene
 {
@@ -78,7 +78,7 @@
 		remainingTime = MAX_TIME;
 		
 		bar = [CCSprite spriteWithFile:@"bar.png"];
-		[self addChild:bar];
+		[self addChild:bar z:1];
 		[bar setPosition:ccp(113,25)];
 		[bar setScaleY:remainingTime];
 		[bar setAnchorPoint:ccp(0.5,0)];
@@ -97,6 +97,30 @@
 	}
 	
 	[bar setScaleY:remainingTime];
+	
+	int currentTimeStatus = self.timeStatus;
+	
+	
+	if (remainingTime < 100) {
+		
+		self.timeStatus = 1;
+		
+	} else  {
+		
+		self.timeStatus = 0;
+	}
+	
+	//*/
+	if (currentTimeStatus == 0 && timeStatus == 1) {
+		
+		[bar runAction:[CCTintTo actionWithDuration:1 red:255 green:0 blue:0]];
+		
+	} else  if (currentTimeStatus == 1 && timeStatus == 0) {
+		
+		[bar runAction:[CCTintTo actionWithDuration:1 red:255 green:255 blue:255]];
+	}
+	///*/
+	
 	
 	if (remainingTime <= 0) {
 		score = 0;
@@ -298,6 +322,7 @@
 				[c.mySprite setOpacity:95];
 				//[c.mySprite setTexture:[[CCTextureCache sharedTextureCache] addImage:@"sSmile.png"]];
 				//[c.mySprite setTextureRect:CGRectMake(34, 2, 32, 32)];
+				[c.mySprite runAction:[CCFadeOut actionWithDuration:0.5]];
 				score += 100 * [n count]; 
 				NSLog(@"Score: %d",score);
 			}
@@ -354,7 +379,8 @@
 			
 			if(nilCount >0 && !stone.disappearing)
 			{
-				[stone.mySprite setPosition:ccp(42*i + GRID_OFFSET.x,42*(j-nilCount) + GRID_OFFSET.y)];
+				//[stone.mySprite setPosition:ccp(42*i + GRID_OFFSET.x,42*(j-nilCount) + GRID_OFFSET.y)];
+				[stone.mySprite runAction:[CCMoveTo actionWithDuration:0.5*nilCount/3 position:ccp(42*i + GRID_OFFSET.x,42*(j-nilCount) + GRID_OFFSET.y)]];
 			}
 		}
 		
@@ -371,7 +397,10 @@
 			CGRect color =[stone setStoneColor:stoneT];
 			[stone.mySprite setTextureRect:color];
 			//*/
-			[stone.mySprite setPosition:ccp(42*i + GRID_OFFSET.x,42*(GRID_HEIGHT -nilCount +q) + GRID_OFFSET.y)];
+			//[stone.mySprite setPosition:ccp(42*i + GRID_OFFSET.x,42*(GRID_HEIGHT -nilCount +q) + GRID_OFFSET.y)];
+			
+			[stone.mySprite runAction:[CCMoveTo actionWithDuration:0.5 position:ccp(42*i + GRID_OFFSET.x,42*(GRID_HEIGHT -nilCount +q) + GRID_OFFSET.y)]];
+			
 			
 			grid[i][GRID_HEIGHT -nilCount +q] = stone;
 			q++;
