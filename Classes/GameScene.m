@@ -55,10 +55,10 @@
 		
 		/*/
 		CCSprite *gridBackground = [CCSprite spriteWithFile:@"grid.png"];
-		[self addChild:gridBackground z:0];
+		[self addChild:gridBackground z:0 tag:kGBack];
 		/*/
 		CCSprite *gridBackground = [CCSprite spriteWithBatchNode:sSheet rect:CGRectMake(166, 1,337, 301)];
-		[sSheet addChild:gridBackground z:0];
+		[sSheet addChild:gridBackground z:0 tag:kGBack];
 		//*/
 		
 		[gridBackground setPosition:ccp(305,160)];
@@ -322,10 +322,34 @@
 				[c.mySprite setOpacity:95];
 				//[c.mySprite setTexture:[[CCTextureCache sharedTextureCache] addImage:@"sSmile.png"]];
 				//[c.mySprite setTextureRect:CGRectMake(34, 2, 32, 32)];
-				[c.mySprite runAction:[CCFadeOut actionWithDuration:0.5]];
+				//[c.mySprite runAction:[CCFadeOut actionWithDuration:0.5]];
+				//*/
+				 CCAction * action = [CCSpawn actions:
+									  [CCFadeOut actionWithDuration:0.5],
+									  [CCScaleTo actionWithDuration:0.5 scale:0.5],nil];
+				[c.mySprite runAction:action];
+				//*/
+				 
 				score += 100 * [n count]; 
 				NSLog(@"Score: %d",score);
 			}
+			
+			/*/
+			CCSprite * b  = (CCSprite *)[self getChildByTag:kGBack];
+			CCAction * act = [CCSequence actions:[CCScaleTo actionWithDuration:0.2 scale:0.9],[CCScaleTo actionWithDuration:0.2 scale:1],nil];
+			[b runAction:[CCRepeat actionWithAction:act times:3]];
+			
+			/*/
+			CCSpriteBatchNode * s = (CCSpriteBatchNode *)[self getChildByTag:kSSheet];
+			CCSprite *b = (CCSprite *) [s getChildByTag:kGBack];
+			
+			CCAction * act = [CCSequence actions:
+										[CCScaleTo actionWithDuration:0.2 scale:0.9],
+										[CCScaleTo actionWithDuration:0.1 scale:1],nil];
+			[b runAction:[CCRepeat actionWithAction:act times:3]];
+			//*/
+			
+			
 		}
 		
 		if ([n count] >= 4) {
@@ -399,7 +423,12 @@
 			//*/
 			//[stone.mySprite setPosition:ccp(42*i + GRID_OFFSET.x,42*(GRID_HEIGHT -nilCount +q) + GRID_OFFSET.y)];
 			
-			[stone.mySprite runAction:[CCMoveTo actionWithDuration:0.5 position:ccp(42*i + GRID_OFFSET.x,42*(GRID_HEIGHT -nilCount +q) + GRID_OFFSET.y)]];
+			//[stone.mySprite runAction:[CCMoveTo actionWithDuration:0.5 position:ccp(42*i + GRID_OFFSET.x,42*(GRID_HEIGHT -nilCount +q) + GRID_OFFSET.y)]];
+			
+			CCAction *action = [CCSequence actions: 
+								[CCMoveTo actionWithDuration:0.5 position:ccp(42*i + GRID_OFFSET.x,42*(GRID_HEIGHT -nilCount +q) + GRID_OFFSET.y)],
+								[CCScaleTo actionWithDuration:0.5 scale:1], nil ];
+			[stone.mySprite runAction:action];
 			
 			
 			grid[i][GRID_HEIGHT -nilCount +q] = stone;

@@ -18,6 +18,7 @@
 #define MAX_TIME 230
 
 #define kSSheet 1 
+#define kGBack 2
 
 @class Stone;
 
