@@ -19,6 +19,7 @@
 
 #define kSSheet 1 
 #define kGBack 2
+#define kBack 3
 
 @class Stone;
 

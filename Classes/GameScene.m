@@ -43,10 +43,10 @@
 		[self addChild:sSheet z:1 tag:kSSheet];
 		/*/
 		CCSprite *background = [CCSprite spriteWithFile:@"background.png"];
-		[self addChild:background z:0];
+		[self addChild:background z:0 tag:kBack];
 		/*/
 		CCSprite *background = [CCSprite spriteWithBatchNode:sSheet rect:CGRectMake(504, 1,480,320)];
-		[sSheet addChild:background z:0];
+		[sSheet addChild:background z:0 tag:kBack];
 		//*/
 		CGSize size = [[CCDirector sharedDirector] winSize];
 		[background setPosition:ccp(size.width/2,size.height/2)];
@@ -339,7 +339,8 @@
 			CCAction * act = [CCSequence actions:[CCScaleTo actionWithDuration:0.2 scale:0.9],[CCScaleTo actionWithDuration:0.2 scale:1],nil];
 			[b runAction:[CCRepeat actionWithAction:act times:3]];
 			
-			/*/
+			//*/
+			//*/
 			CCSpriteBatchNode * s = (CCSpriteBatchNode *)[self getChildByTag:kSSheet];
 			CCSprite *b = (CCSprite *) [s getChildByTag:kGBack];
 			
@@ -355,6 +356,24 @@
 		
 		if ([n count] >= 4) {
 			[self changeTime:50];
+		}
+		
+		if ([n count] >= 5) {
+			NSLog(@">>>>>>>>>>        run effect!!!!!!");
+			
+			//*/
+			CCSpriteBatchNode *s = (CCSpriteBatchNode *)[self getChildByTag:kSSheet];
+			CCSprite *back = (CCSprite *) [s getChildByTag:kBack];
+			/*/
+			CCSprite *back = (CCSprite *) [self getChildByTag:kBack];
+			//*/
+			
+			CCAction * effect = [CCSequence actions:
+									[CCWaves actionWithWaves:10 amplitude:10 horizontal:YES vertical:YES grid:ccg(10, 10) duration:3],
+									[CCStopGrid action],nil];
+			[back runAction:effect];
+			
+			
 		}
 	}
 	
