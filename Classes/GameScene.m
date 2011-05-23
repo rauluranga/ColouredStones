@@ -343,6 +343,7 @@
 			CCSpriteBatchNode * s = (CCSpriteBatchNode *)[self getChildByTag:kSSheet];
 			CCSprite *b = (CCSprite *) [s getChildByTag:kGBack];
 			
+			//CCActionInterval removes warning
 			CCAction * act = [CCSequence actions:
 										[CCScaleTo actionWithDuration:0.2 scale:0.9],
 										[CCScaleTo actionWithDuration:0.1 scale:1],nil];
@@ -404,7 +405,12 @@
 			if(nilCount >0 && !stone.disappearing)
 			{
 				//[stone.mySprite setPosition:ccp(42*i + GRID_OFFSET.x,42*(j-nilCount) + GRID_OFFSET.y)];
-				[stone.mySprite runAction:[CCMoveTo actionWithDuration:0.5*nilCount/3 position:ccp(42*i + GRID_OFFSET.x,42*(j-nilCount) + GRID_OFFSET.y)]];
+				//[stone.mySprite runAction:[CCMoveTo actionWithDuration:0.5*nilCount/3 position:ccp(42*i + GRID_OFFSET.x,42*(j-nilCount) + GRID_OFFSET.y)]];
+				
+				CCAction *easeA = [CCEaseBounceOut actionWithAction:[CCMoveTo actionWithDuration:0.5*nilCount/3 position:ccp(42*i + GRID_OFFSET.x,42*(j-nilCount) + GRID_OFFSET.y)]];
+				[stone.mySprite runAction:easeA];
+				
+				
 			}
 		}
 		
@@ -425,12 +431,18 @@
 			
 			//[stone.mySprite runAction:[CCMoveTo actionWithDuration:0.5 position:ccp(42*i + GRID_OFFSET.x,42*(GRID_HEIGHT -nilCount +q) + GRID_OFFSET.y)]];
 			
+			/*/
 			CCAction *action = [CCSequence actions: 
 								[CCMoveTo actionWithDuration:0.5 position:ccp(42*i + GRID_OFFSET.x,42*(GRID_HEIGHT -nilCount +q) + GRID_OFFSET.y)],
 								[CCScaleTo actionWithDuration:0.5 scale:1], nil ];
 			[stone.mySprite runAction:action];
+			/*/
 			
+			CCAction *easeA = [CCEaseBounceOut actionWithAction:[CCMoveTo actionWithDuration:0.5 position:ccp(42*i + GRID_OFFSET.x,42*(GRID_HEIGHT -nilCount +q) + GRID_OFFSET.y)]];
+			CCAction *action = [CCSequence actions:easeA,[CCScaleTo actionWithDuration:0.5 scale:1], nil];
+			[stone.mySprite runAction:action];
 			
+			//*/
 			grid[i][GRID_HEIGHT -nilCount +q] = stone;
 			q++;
 		}
