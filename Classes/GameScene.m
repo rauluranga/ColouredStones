@@ -9,11 +9,18 @@
 // Import the interfaces
 #import "GameScene.h"
 
+@interface GameScene (private)
+-(void)startGame;
+-(void)removeSprite:(CCNode *)n;
+-(void)removeSpriteAndBegin:(CCNode *)n;
+@end
+
+
 
 // GameScene implementation
 @implementation GameScene
 
-@synthesize score,allowTouch,remainingTime,bar,timeStatus;
+@synthesize score,allowTouch,remainingTime,bar,timeStatus,timerRunning;
 
 +(id) scene
 {
@@ -37,7 +44,8 @@
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init] )) {
 		
-		self.allowTouch = YES;
+		self.allowTouch = NO;
+		self.timerRunning = NO;
 		
 		CCSpriteBatchNode * sSheet = [CCSpriteBatchNode batchNodeWithFile:@"colouredSheet.png"];
 		[self addChild:sSheet z:1 tag:kSSheet];
@@ -84,48 +92,109 @@
 		[bar setAnchorPoint:ccp(0.5,0)];
 		
 		[self schedule:@selector(drainTime) interval:0.20];
+		
+		
+		[self startGame];
 
 		
 	}
 	return self;
 }
 
+-(void)startGame
+{
+	CCSprite *ready = [CCSprite spriteWithFile:@"ready.png"];
+	[self addChild:ready z:3];
+	[ready setPosition:ccp(240,160)];
+	[ready setOpacity:0];
+	
+	CCSprite *set = [CCSprite spriteWithFile:@"set.png"];
+	[self addChild:set z:3];
+	[set setPosition:ccp(240,160)];
+	[set setOpacity:0];
+
+	CCSprite *go = [CCSprite spriteWithFile:@"go.png"];
+	[self addChild:go z:3];
+	[go setPosition:ccp(240,160)];
+	[go setOpacity:0];
+	
+	
+	[ready runAction:[CCSequence actions:[CCDelayTime actionWithDuration:0.5],
+										 [CCSpawn actions:[CCFadeIn actionWithDuration:0.4],[CCScaleTo actionWithDuration:0.4 scale:1.2],nil],
+										 [CCDelayTime actionWithDuration:0.2],
+										 [CCFadeOut actionWithDuration:0.4],
+										 [CCCallFunc actionWithTarget:self selector:@selector(removeSprite:)],
+										 nil]];
+	
+	
+	[set runAction:[CCSequence actions:[CCDelayTime actionWithDuration:1.5],
+					  [CCSpawn actions:[CCFadeIn actionWithDuration:0.4],[CCScaleTo actionWithDuration:0.4 scale:1.2],nil],
+					  [CCDelayTime actionWithDuration:0.2],
+					  [CCFadeOut actionWithDuration:0.4],
+					  [CCCallFunc actionWithTarget:self selector:@selector(removeSprite:)],
+					  nil]];
+	
+	
+	[go runAction:[CCSequence actions:[CCDelayTime actionWithDuration:2.5],
+					  [CCSpawn actions:[CCFadeIn actionWithDuration:0.4],[CCScaleTo actionWithDuration:0.4 scale:1.2],nil],
+					  [CCDelayTime actionWithDuration:0.2],
+					  [CCFadeOut actionWithDuration:0.4],
+					  [CCCallFunc actionWithTarget:self selector:@selector(removeSpriteAndBegin:)],
+					  nil]];
+}
+
+-(void)removeSprite:(CCNode *)n
+{
+	[self removeChild:n cleanup:YES];
+}
+
+-(void)removeSpriteAndBegin:(CCNode *)n
+{
+	[self removeChild:n cleanup:YES];
+	self.allowTouch = YES;
+	self.timerRunning = YES;
+}
+
 -(void)drainTime
 {
-	if (remainingTime > 0) {
-		remainingTime--;
-	}
 	
-	[bar setScaleY:remainingTime];
-	
-	int currentTimeStatus = self.timeStatus;
-	
-	
-	if (remainingTime < 100) {
+	if (self.timerRunning) {
 		
-		self.timeStatus = 1;
+		if (remainingTime > 0) {
+			remainingTime--;
+		}
 		
-	} else  {
+		[bar setScaleY:remainingTime];
 		
-		self.timeStatus = 0;
-	}
-	
-	//*/
-	if (currentTimeStatus == 0 && timeStatus == 1) {
+		int currentTimeStatus = self.timeStatus;
 		
-		[bar runAction:[CCTintTo actionWithDuration:1 red:255 green:0 blue:0]];
 		
-	} else  if (currentTimeStatus == 1 && timeStatus == 0) {
+		if (remainingTime < 100) {
+			
+			self.timeStatus = 1;
+			
+		} else  {
+			
+			self.timeStatus = 0;
+		}
 		
-		[bar runAction:[CCTintTo actionWithDuration:1 red:255 green:255 blue:255]];
-	}
-	///*/
-	
-	
-	if (remainingTime <= 0) {
-		score = 0;
-		NSLog(@"You Lost!");
-		remainingTime = MAX_TIME;
+		//*/
+		if (currentTimeStatus == 0 && timeStatus == 1) {
+			
+			[bar runAction:[CCTintTo actionWithDuration:1 red:255 green:0 blue:0]];
+			
+		} else  if (currentTimeStatus == 1 && timeStatus == 0) {
+			
+			[bar runAction:[CCTintTo actionWithDuration:1 red:255 green:255 blue:255]];
+		}
+		///*/
+		
+		
+		if (remainingTime <= 0) {
+			score = 0;
+			NSLog(@"You Lost!");
+			remainingTime = MAX_TIME;
+		}
 	}
 }
 

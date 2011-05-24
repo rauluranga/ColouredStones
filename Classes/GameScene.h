@@ -29,6 +29,7 @@
 	Stone *grid[8][7];
 	int *int_grid[8][7];
 	BOOL allowTouch;
+	BOOL timerRunning;
 	int score;
 	int remainingTime;
 	CCSprite* bar;
@@ -36,6 +37,7 @@
 }
 
 @property (readwrite, assign)BOOL allowTouch;
+@property (readwrite, assign)BOOL timerRunning;
 @property (readwrite, assign)int score;
 @property (readwrite, assign)int remainingTime;
 @property (readwrite, assign)int timeStatus;
