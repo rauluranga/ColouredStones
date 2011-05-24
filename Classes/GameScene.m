@@ -41,7 +41,7 @@
 		
 		CCSpriteBatchNode * sSheet = [CCSpriteBatchNode batchNodeWithFile:@"colouredSheet.png"];
 		[self addChild:sSheet z:1 tag:kSSheet];
-		/*/
+		//*/
 		CCSprite *background = [CCSprite spriteWithFile:@"background.png"];
 		[self addChild:background z:0 tag:kBack];
 		/*/
@@ -340,7 +340,7 @@
 			[b runAction:[CCRepeat actionWithAction:act times:3]];
 			
 			//*/
-			//*/
+			/*/
 			CCSpriteBatchNode * s = (CCSpriteBatchNode *)[self getChildByTag:kSSheet];
 			CCSprite *b = (CCSprite *) [s getChildByTag:kGBack];
 			
@@ -361,7 +361,12 @@
 		if ([n count] >= 5) {
 			NSLog(@">>>>>>>>>>        run effect!!!!!!");
 			
-			//*/
+			/*/
+			//
+			//
+			//TODO ver porque no funciona si usas el sprite desde CCSpriteBatchNode
+			//
+			//
 			CCSpriteBatchNode *s = (CCSpriteBatchNode *)[self getChildByTag:kSSheet];
 			CCSprite *back = (CCSprite *) [s getChildByTag:kBack];
 			/*/
@@ -373,7 +378,11 @@
 									[CCStopGrid action],nil];
 			[back runAction:effect];
 			
-			
+			/*/
+			//copy effect
+			CCAction * effect2 = [[effect copy]autorelease];
+			[bar runAction:effect2];
+			//*/
 		}
 	}
 	
