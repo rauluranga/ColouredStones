@@ -13,6 +13,7 @@
 -(void)startGame;
 -(void)removeSprite:(CCNode *)n;
 -(void)removeSpriteAndBegin:(CCNode *)n;
+-(void)moveBar:(CCSprite *)bar byAmount:(void *)amount;
 @end
 
 
@@ -200,7 +201,14 @@
 
 -(void)changeTime:(int)time
 {
-	remainingTime += time;
+	[bar runAction:[CCSequence actions:[CCBlink actionWithDuration:1 blinks:10],
+									   [CCCallFuncND actionWithTarget:self selector:@selector(moveBar:byAmount:) data:(void *)time],
+									   nil]];
+}
+
+-(void)moveBar:(CCSprite *)bar byAmount:(void *)amount
+{
+	remainingTime += (int)amount;
 	
 	if (remainingTime > MAX_TIME) {
 		
@@ -210,7 +218,6 @@
 		remainingTime = 0;
 	}
 }
-
 
 -(void)placeStones
 {
