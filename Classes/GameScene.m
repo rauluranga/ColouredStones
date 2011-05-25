@@ -21,7 +21,7 @@
 // GameScene implementation
 @implementation GameScene
 
-@synthesize score,allowTouch,remainingTime,bar,timeStatus,timerRunning;
+@synthesize score,allowTouch,remainingTime,bar,timeStatus,timerRunning,blueFrames;
 
 +(id) scene
 {
@@ -48,7 +48,15 @@
 		self.allowTouch = NO;
 		self.timerRunning = NO;
 		
-		CCSpriteBatchNode * sSheet = [CCSpriteBatchNode batchNodeWithFile:@"colouredSheet.png"];
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"colouredSheet1.plist"];
+		
+		blueFrames = [[NSMutableArray  alloc]init];
+		for(int i = 1; i < 5; i++) {
+			CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"sBlue%d.png",i]];
+			[blueFrames addObject:frame];
+		}
+		
+		CCSpriteBatchNode * sSheet = [CCSpriteBatchNode batchNodeWithFile:@"colouredSheet1.png"];
 		[self addChild:sSheet z:1 tag:kSSheet];
 		//*/
 		CCSprite *background = [CCSprite spriteWithFile:@"background.png"];
@@ -440,7 +448,7 @@
 			/*/
 			//
 			//
-			//TODO ver porque no funciona si usas el sprite desde CCSpriteBatchNode
+			//TODO: ver porque no funciona si usas el sprite desde CCSpriteBatchNode
 			//
 			//
 			CCSpriteBatchNode *s = (CCSpriteBatchNode *)[self getChildByTag:kSSheet];
@@ -530,6 +538,9 @@
 			/*/
 			CGRect color =[stone setStoneColor:stoneT];
 			[stone.mySprite setTextureRect:color];
+			
+			[stone setAnimation];
+			 
 			//*/
 			//[stone.mySprite setPosition:ccp(42*i + GRID_OFFSET.x,42*(GRID_HEIGHT -nilCount +q) + GRID_OFFSET.y)];
 			

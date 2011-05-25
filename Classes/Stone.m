@@ -57,11 +57,39 @@
 		[s addChild:mySprite z:1];
 		//*/
 		
-		
+		[self setAnimation];
 		
 		
 		self.stoneType = sType;
 		[self.mySprite setPosition:place];
+	}
+}
+
+-(void)setAnimation
+{
+	[self.mySprite stopAllActions];
+	CCAnimation *animation;
+	switch (self.stoneType) {
+		case 0:
+			break;
+		case 1:
+			
+			//TODO: *** deprecated ***
+			//animation =  [CCAnimation animationWithName:@"fBlue" delay:0.1f frames:theGame.blueFrames];
+			
+			animation = [CCAnimation animationWithFrames:theGame.blueFrames delay:0.1f];
+			
+			[self.mySprite runAction:[CCRepeatForever actionWithAction:
+														[CCSequence actions:
+															[CCDelayTime actionWithDuration:arc4random()%5],
+															[CCAnimate actionWithAnimation:animation restoreOriginalFrame:0],
+															nil] ]];
+
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
 	}
 }
 

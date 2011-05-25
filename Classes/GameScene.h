@@ -34,6 +34,7 @@
 	int remainingTime;
 	CCSprite* bar;
 	int timeStatus;
+	NSMutableArray *blueFrames;
 }
 
 @property (readwrite, assign)BOOL allowTouch;
@@ -42,6 +43,7 @@
 @property (readwrite, assign)int remainingTime;
 @property (readwrite, assign)int timeStatus;
 @property (nonatomic, retain)CCSprite* bar;
+@property (nonatomic, retain)NSMutableArray *blueFrames;
 
 
 // returns a Scene that contains the HelloWorld as the only child

@@ -48,6 +48,7 @@ typedef enum tagState {
 
 //-(NSString *) setStoneColor:(int) stoneT;
 -(CGRect)setStoneColor:(int)stoneT;
+-(void)setAnimation;
 
 
 

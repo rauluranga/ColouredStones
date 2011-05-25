@@ -113,7 +113,7 @@
 	[[CCDirector sharedDirector] runWithScene: [GameScene scene]];		
 	
 	//preloading images
-	//[[CCTextureCache sharedTextureCache]addImageAsync:@"colouredSheet.png" target:self selector:@selector(imageLoaded:)];
+	//[[CCTextureCache sharedTextureCache]addImageAsync:@"colouredSheet1.png" target:self selector:@selector(imageLoaded:)];
 	
 	
 }
