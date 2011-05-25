@@ -7,6 +7,8 @@
 //
 
 // Import the interfaces
+#import "Stone.h"
+#import "Tutorial.h"
 #import "GameScene.h"
 
 @interface GameScene (private)
@@ -162,6 +164,9 @@
 	[self removeChild:n cleanup:YES];
 	self.allowTouch = YES;
 	self.timerRunning = YES;
+	
+	Tutorial * t = [[[Tutorial alloc]initWithText:@"Welcome to Coloured Stones! \n To begin playing, touch an stone and drag it around to swap it with an adjacent one. \n Match 3 or more stones to score points." theGame:self]autorelease]; 
+
 }
 
 -(void)drainTime

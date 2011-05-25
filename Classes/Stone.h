@@ -8,15 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "GameScene.h"
+#import "Global.h"
 
 @class GameScene;
-
-
-typedef enum tagState {
-	kStateGrabbed,
-	kStateUnGrabbed
-} touchState;
 
 @interface Stone : CCNode <CCTargetedTouchDelegate> {
 	CCSprite *mySprite;

@@ -7,9 +7,12 @@
 //
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
-#import "Stone.h"
+#import "Global.h"
 
+//#import "Stone.h"
+//#import "Tutorial.h"
 
+/*/
 #define GRID_WIDTH 8
 #define GRID_HEIGHT 7
 #define GRID_OFFSET ccp(158,35)
@@ -20,8 +23,10 @@
 #define kSSheet 1 
 #define kGBack 2
 #define kBack 3
+//*/
 
 @class Stone;
+@class Tutorial;
 
 // HelloWorld Layer
 @interface GameScene : CCLayer

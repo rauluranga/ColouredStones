@@ -6,7 +6,9 @@
 //  Copyright 2011 GrupoW. All rights reserved.
 //
 
+#import "GameScene.h"
 #import "Stone.h"
+
 
 @interface Stone (private)
 -(BOOL) containsTouchLocation:(UITouch *)touch;
