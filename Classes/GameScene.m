@@ -83,8 +83,16 @@
 		[gridBackground setPosition:ccp(305,160)];
 		
 		
+		/*/
 		
 		CCLabelAtlas *scoreLabel = [CCLabelAtlas labelWithString:@"0" charMapFile:@"fps_images.png" itemWidth:16 itemHeight:24 startCharMap:'.'];
+		
+		/*/
+		
+		CCLabelBMFont *scoreLabel = [CCLabelBMFont labelWithString:@"0" fntFile:@"ArcadeClassic.fnt"];
+		
+		//*/
+		
 		[scoreLabel setPosition:ccp(115,280)];
 		[scoreLabel setAnchorPoint:ccp(1,0.5)];
 		

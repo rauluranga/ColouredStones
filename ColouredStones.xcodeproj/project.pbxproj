@@ -85,6 +85,8 @@
 		C4F3ECAD138D7EE4005486D3 /* Tutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F3ECAC138D7EE4005486D3 /* Tutorial.m */; };
 		C4F866B41395689B0067B712 /* feedbackFont_0.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F866B21395689B0067B712 /* feedbackFont_0.png */; };
 		C4F866B51395689B0067B712 /* feedbackFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = C4F866B31395689B0067B712 /* feedbackFont.fnt */; };
+		C4F866F6139574920067B712 /* ArcadeClassic.fnt in Resources */ = {isa = PBXBuildFile; fileRef = C4F866F4139574920067B712 /* ArcadeClassic.fnt */; };
+		C4F866F7139574920067B712 /* ArcadeClassic.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F866F5139574920067B712 /* ArcadeClassic.png */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		DC6640050F83B3EA000B3E49 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
 		DCCBF1B70F6022AE0040855A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -359,6 +361,8 @@
 		C4F3ECAC138D7EE4005486D3 /* Tutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tutorial.m; sourceTree = "<group>"; };
 		C4F866B21395689B0067B712 /* feedbackFont_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedbackFont_0.png; sourceTree = "<group>"; };
 		C4F866B31395689B0067B712 /* feedbackFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = feedbackFont.fnt; sourceTree = "<group>"; };
+		C4F866F4139574920067B712 /* ArcadeClassic.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ArcadeClassic.fnt; sourceTree = "<group>"; };
+		C4F866F5139574920067B712 /* ArcadeClassic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ArcadeClassic.png; sourceTree = "<group>"; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DC6640040F83B3EA000B3E49 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -752,6 +756,8 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C4F866F4139574920067B712 /* ArcadeClassic.fnt */,
+				C4F866F5139574920067B712 /* ArcadeClassic.png */,
 				C4F866B21395689B0067B712 /* feedbackFont_0.png */,
 				C4F866B31395689B0067B712 /* feedbackFont.fnt */,
 				C4F3ECA9138D7EBC005486D3 /* tutorialBackground.png */,
@@ -1213,6 +1219,8 @@
 				C4F3ECAA138D7EBC005486D3 /* tutorialBackground.png in Resources */,
 				C4F866B41395689B0067B712 /* feedbackFont_0.png in Resources */,
 				C4F866B51395689B0067B712 /* feedbackFont.fnt in Resources */,
+				C4F866F6139574920067B712 /* ArcadeClassic.fnt in Resources */,
+				C4F866F7139574920067B712 /* ArcadeClassic.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
