@@ -420,6 +420,9 @@
 	
 	BOOL moveStones = NO;
 	for (NSMutableSet * n in groupings)  {
+		
+		CGPoint averagePos = CGPointZero;
+		
 		if ([n count] >= 3) {
 			for(Stone * c in n){
 				c.disappearing = YES;
@@ -439,8 +442,23 @@
 				NSLog(@"Score: %d",score);
 				CCLabelAtlas *label = [(CCLabelAtlas *) self getChildByTag:kScoreLabel];
 				[label setString:[NSString stringWithFormat:@"%d",score]];
+				
+				// TODO: enviar errata en el libro dice cp y es ccp p138
+				averagePos = ccp(averagePos.x + c.mySprite.position.x, averagePos.y + c.mySprite.position.y);
 			}
 			
+			averagePos = ccp(averagePos.x/[n count],averagePos.y/[n count]);
+			
+			int newScore = 100 * [n count];
+			score += newScore;
+			
+			// TODO: CCBitmapFontAtlas deprecated use CCLabelBMFont instead
+			//CCBitmapFontAtlas *feedTxt = [CCBitmapFontAtlas bitmapFontAtlasWithString:[NSString stringWithFormat:@"%d",newScore] fntFile:@"feedbackFont.fnt"];
+			CCLabelBMFont *feedTxt = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",newScore] fntFile:@"feedbackFont.fnt"];
+						
+			[feedTxt setPosition:averagePos];
+			[feedTxt setColor:ccRED];
+			[self addChild:feedTxt z:5];
 			/*/
 			CCSprite * b  = (CCSprite *)[self getChildByTag:kGBack];
 			CCAction * act = [CCSequence actions:[CCScaleTo actionWithDuration:0.2 scale:0.9],[CCScaleTo actionWithDuration:0.2 scale:1],nil];
