@@ -459,6 +459,24 @@
 			[feedTxt setPosition:averagePos];
 			[feedTxt setColor:ccRED];
 			[self addChild:feedTxt z:5];
+			
+			
+			float dTime = 0;
+			for (CCSprite *p in [feedTxt children]) {
+				[p runAction:[CCSequence actions: [CCDelayTime actionWithDuration:1 + (dTime/3)],
+												  [CCMoveBy actionWithDuration:1 position:ccp(0,30)],
+												   nil
+												   ]];
+				dTime++;
+			}
+			
+			[feedTxt runAction:[CCSequence actions: [CCFadeIn actionWithDuration:1],
+								[CCDelayTime actionWithDuration:1],
+								[CCFadeOut actionWithDuration:1],
+								[CCCallFuncN actionWithTarget:self selector:@selector(removeSprite:)],
+								nil 
+								]];
+			
 			/*/
 			CCSprite * b  = (CCSprite *)[self getChildByTag:kGBack];
 			CCAction * act = [CCSequence actions:[CCScaleTo actionWithDuration:0.2 scale:0.9],[CCScaleTo actionWithDuration:0.2 scale:1],nil];
