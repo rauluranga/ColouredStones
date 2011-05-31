@@ -82,6 +82,17 @@
 		
 		[gridBackground setPosition:ccp(305,160)];
 		
+		
+		
+		CCLabelAtlas *scoreLabel = [CCLabelAtlas labelWithString:@"0" charMapFile:@"fps_images.png" itemWidth:16 itemHeight:24 startCharMap:'.'];
+		[scoreLabel setPosition:ccp(115,280)];
+		[scoreLabel setAnchorPoint:ccp(1,0.5)];
+		
+		[self addChild:scoreLabel z:2 tag:kScoreLabel];
+		
+		
+		
+		
 		for(int i =0; i< GRID_WIDTH ; i++)
 		{
 			for(int j =0; j< GRID_HEIGHT ; j++)
@@ -206,7 +217,12 @@
 		
 		if (remainingTime <= 0) {
 			score = 0;
+			
+			CCLabelAtlas *label = [(CCLabelAtlas *) self getChildByTag:kScoreLabel];
+			[label setString:[NSString stringWithFormat:@"%d",score]];
+			
 			NSLog(@"You Lost!");
+			
 			remainingTime = MAX_TIME;
 		}
 	}
@@ -421,6 +437,8 @@
 				 
 				score += 100 * [n count]; 
 				NSLog(@"Score: %d",score);
+				CCLabelAtlas *label = [(CCLabelAtlas *) self getChildByTag:kScoreLabel];
+				[label setString:[NSString stringWithFormat:@"%d",score]];
 			}
 			
 			/*/

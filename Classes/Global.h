@@ -21,6 +21,7 @@
 #define kSSheet 1 
 #define kGBack 2
 #define kBack 3
+#define kScoreLabel 4
 
 typedef enum tagState {
 	kStateGrabbed,
